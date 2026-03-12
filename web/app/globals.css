@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-nineties: "Perfectly Nineties";
+  --font-jetbrains: "JetBrains Mono";
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-atlas-dark;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+}
