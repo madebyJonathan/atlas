@@ -1,0 +1,168 @@
+@font-face {
+  font-family: "Perfectly Nineties";
+  src: url("fonts/PerfectlyNineties-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "JetBrains Mono", monospace;
+  background: #ffffff;
+  color: #1a1a1a;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Hero ─────────────────────────────────────────── */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 780px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  background-image: url("images/atlas-construction-hero.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: flex-end;
+  gap: 80px;
+  width: 100%;
+  padding: 0 64px 112px;
+}
+
+/* Left column */
+.hero__text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.hero__heading {
+  font-family: "Perfectly Nineties", serif;
+  font-size: 56px;
+  font-weight: normal;
+  line-height: 1.2;
+  color: #ecece3;
+}
+
+.hero__subtext {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #ecece3;
+}
+
+/* Right column */
+.hero__actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  flex-shrink: 0;
+}
+
+.btn {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, opacity 0.2s;
+}
+
+.btn--outline {
+  color: #ecece3;
+  border: 1px solid #ecece3;
+  border-radius: 100px;
+  padding: 12px 24px;
+}
+
+.btn--outline:hover {
+  background: #ecece3;
+  color: #2c2c2c;
+}
+
+.btn--ghost {
+  color: #ecece3;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn--ghost:hover {
+  opacity: 0.7;
+}
+
+.btn__arrow {
+  width: 20px;
+  height: 20px;
+  stroke: #ecece3;
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── Responsive ───────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .hero {
+    height: 600px;
+  }
+
+  .hero__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 0 16px 48px;
+  }
+
+  .hero__heading {
+    font-size: 36px;
+  }
+
+  .hero__subtext {
+    font-size: 14px;
+  }
+
+  .btn {
+    font-size: 14px;
+  }
+
+  .btn--outline {
+    padding: 10px 18px;
+  }
+}
