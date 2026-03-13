@@ -59,7 +59,7 @@ export default function OurExpertise() {
   return (
     <section
       id="our-expertise"
-      className="w-full bg-white flex flex-col items-center gap-20 px-16 py-20"
+      className="w-full bg-white flex flex-col items-center gap-12 md:gap-20 px-4 md:px-16 py-12 md:py-20"
     >
       {/* Section Header */}
       <div className="flex flex-col gap-6 w-full">
@@ -69,7 +69,7 @@ export default function OurExpertise() {
             our expertise
           </span>
         </div>
-        <h2 className="font-nineties text-[48px] leading-[1.2] text-atlas-dark">
+        <h2 className="font-nineties text-3xl md:text-[48px] leading-[1.2] text-atlas-dark">
           What we do best.
         </h2>
         <p className="font-mono text-base leading-[1.6] text-atlas-gray max-w-[800px]">
@@ -81,12 +81,12 @@ export default function OurExpertise() {
 
       {/* Tabbed Card */}
       <div
-        className="w-full border border-black overflow-hidden flex"
+        className="w-full border border-black overflow-hidden flex flex-col md:flex-row"
         style={{ minHeight: 448 }}
       >
         {/* Tab Content */}
         <div
-          className="relative w-[800px] flex-shrink-0 flex flex-col justify-center gap-8 p-16"
+          className="relative w-full md:w-[800px] flex-shrink-0 flex flex-col justify-center gap-8 p-8 md:p-16"
           style={{ minHeight: 448 }}
         >
           <Image

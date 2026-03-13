@@ -22,9 +22,9 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="w-full bg-[#2c2c2c] flex items-center px-16 py-28"
+      className="w-full bg-[#2c2c2c] flex items-center px-4 md:px-16 py-16 md:py-28"
     >
-      <div className="flex gap-20 w-full max-w-[1440px] mx-auto">
+      <div className="flex flex-col md:flex-row gap-12 md:gap-20 w-full max-w-[1440px] mx-auto">
         {/* Left Column */}
         <div className="flex-1 flex flex-col gap-8">
           {/* Section Title */}
@@ -36,7 +36,7 @@ export default function Contact() {
               </span>
             </div>
             <div className="flex flex-col gap-6">
-              <h2 className="font-nineties text-[48px] leading-[1.2] text-[#ecece3]">
+              <h2 className="font-nineties text-3xl md:text-[48px] leading-[1.2] text-[#ecece3]">
                 Let&apos;s Build Something Great
               </h2>
               <p className="font-mono text-lg leading-[1.5] text-[#ecece3aa]">
