@@ -48,7 +48,7 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className={`font-mono text-sm tracking-[0.05em] transition-colors hover:opacity-70 ${
+                className={`font-mono text-base uppercase tracking-[0.8px] transition-colors hover:opacity-70 ${
                   scrolled ? "text-atlas-dark" : "text-[#ecece3]"
                 }`}
               >
@@ -80,7 +80,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setMenuOpen(false)}
-              className="font-mono text-sm tracking-[0.05em] text-atlas-dark px-6 py-4 border-b border-black/5 hover:bg-gray-50 transition-colors"
+              className="font-mono text-base uppercase tracking-[0.8px] text-atlas-dark px-6 py-4 border-b border-black/5 hover:bg-gray-50 transition-colors"
             >
               {link.label}
             </a>
