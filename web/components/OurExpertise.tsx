@@ -95,7 +95,7 @@ export default function OurExpertise() {
             fill
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-black/67" />
+          <div className="absolute inset-0 bg-black/60" />
 
           <div className="relative z-10 flex flex-col gap-6 w-full">
             <div className="flex flex-col gap-6">
