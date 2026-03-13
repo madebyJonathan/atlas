@@ -28,7 +28,7 @@ export default function Hero() {
           </div>
 
           {/* Right: buttons */}
-          <div className="flex flex-col items-start gap-4 flex-shrink-0">
+          <div className="flex flex-row items-center gap-6 flex-shrink-0">
             <a
               href="#contact"
               className="font-mono text-base font-semibold tracking-[0.05em] text-[#ecece3] border border-[#ecece3] rounded-full px-6 py-3 hover:bg-[#ecece3] hover:text-atlas-charcoal transition-colors whitespace-nowrap"
