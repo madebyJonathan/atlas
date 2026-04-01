@@ -85,7 +85,7 @@ export default function OurExpertise() {
       </div>
 
       {/* Tabs Bar */}
-      <div className="flex flex-row border-b border-[#e0e0e0] overflow-x-auto">
+      <div className="flex flex-row border-b border-[#e0e0e0] overflow-x-auto scroll-auto">
         {tabs.map((tab, i) => (
           <button
             key={tab.id}
