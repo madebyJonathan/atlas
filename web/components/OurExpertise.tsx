@@ -1,23 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronRight, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 
 const tabs = [
   {
     id: "kitchen",
     label: "Kitchen & Bath",
-    heading: "Kitchen & Bath Remodeling",
+    num: "01",
+    heading: "Kitchen & Bath\nRemodeling",
     description:
       "Transform your kitchen or bathroom into a stunning, functional space. We handle everything from custom cabinetry and countertops to plumbing and tile work.",
     image:
-      "https://images.unsplash.com/photo-1747538454766-9f4f99a2de8f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080",
+      "https://images.unsplash.com/photo-1682888813788-373f947aacb3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080",
   },
   {
     id: "whole-home",
     label: "Whole Home",
-    heading: "Whole Home Renovation",
+    num: "02",
+    heading: "Whole Home\nRenovation",
     description:
       "Complete end-to-end home transformations that reimagine every room. From structural changes to interior finishes, we manage your entire project.",
     image:
@@ -26,7 +28,8 @@ const tabs = [
   {
     id: "outdoor",
     label: "Outdoor Living",
-    heading: "Outdoor Living Spaces",
+    num: "03",
+    heading: "Outdoor Living\nSpaces",
     description:
       "Extend your living space outdoors with custom decks, patios, pergolas, and landscaping. We design and build beautiful outdoor environments.",
     image:
@@ -35,7 +38,8 @@ const tabs = [
   {
     id: "custom-builds",
     label: "Custom Builds",
-    heading: "Custom Builds",
+    num: "04",
+    heading: "Custom\nBuilds",
     description:
       "From ADUs to full custom home construction, we bring your architectural vision to life with precision craftsmanship and quality materials.",
     image:
@@ -44,7 +48,8 @@ const tabs = [
   {
     id: "interior",
     label: "Interior Design",
-    heading: "Interior Design",
+    num: "05",
+    heading: "Interior\nDesign",
     description:
       "Our in-house design team works with you to create spaces that are both beautiful and functional, with custom selections tailored to your lifestyle.",
     image:
@@ -59,95 +64,88 @@ export default function OurExpertise() {
   return (
     <section
       id="our-expertise"
-      className="w-full bg-white flex flex-col items-center gap-12 md:gap-20 px-4 md:px-16 py-12 md:py-20"
+      className="w-full bg-white flex flex-col px-4 md:px-16 py-16 md:py-20 gap-12"
     >
       {/* Section Header */}
-      <div className="flex flex-col gap-6 w-full">
+      <div className="flex flex-col gap-6">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-px bg-atlas-charcoal" />
-          <span className="font-mono text-sm font-medium tracking-[0.1em] text-atlas-charcoal uppercase">
+          <div className="w-8 h-px bg-[#2c2c2c]" />
+          <span className="font-mono text-sm font-medium tracking-[0.1em] text-[#2c2c2c] uppercase">
             our expertise
           </span>
         </div>
-        <h2 className="font-nineties text-3xl md:text-[48px] leading-[1.2] text-atlas-dark">
+        <h2 className="font-nineties text-3xl md:text-[48px] leading-[1.2] text-[#1a1a1a]">
           What we do best.
         </h2>
-        <p className="font-mono text-base leading-[1.6] text-atlas-gray max-w-[800px]">
+        <p className="font-mono text-base leading-[1.6] text-[#555555] max-w-[800px]">
           From full-scale renovations to custom builds, our team brings
           specialized knowledge to every project. Explore our core service areas
           below.
         </p>
       </div>
 
-      {/* Tabbed Card */}
-      <div
-        className="w-full border border-black overflow-hidden flex flex-col md:flex-row"
-        style={{ minHeight: 448 }}
-      >
-        {/* Tab Content */}
-        <div
-          className="relative w-full md:w-[800px] flex-shrink-0 flex flex-col justify-center gap-8 p-8 md:p-16"
-          style={{ minHeight: 448 }}
-        >
+      {/* Tabs Bar */}
+      <div className="flex flex-row border-b border-[#e0e0e0] overflow-x-auto">
+        {tabs.map((tab, i) => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(i)}
+            className={`flex items-center px-6 py-4 pb-5 font-mono text-[15px] tracking-[0.03em] whitespace-nowrap transition-colors ${
+              i === activeTab
+                ? "text-[#1a1a1a] font-medium border-b-2 border-[#1a1a1a] -mb-px"
+                : "text-[#999999] font-normal"
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Showcase */}
+      <div className="w-full flex flex-col md:flex-row rounded-[4px] overflow-hidden" style={{ height: 520 }}>
+        {/* Image Area */}
+        <div className="relative flex-1 flex flex-col justify-end p-12 min-h-[300px] md:min-h-0">
           <Image
+            key={current.id}
             src={current.image}
-            alt={current.heading}
+            alt={current.label}
             fill
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-black/60" />
-
-          <div className="relative z-10 flex flex-col gap-6 w-full">
-            <div className="flex flex-col gap-6">
-              <h3 className="font-nineties text-[40px] leading-[1.2] text-[#ecece3]">
-                {current.heading}
-              </h3>
-              <p className="font-mono text-base leading-[1.5] text-[#ecece3cc]">
-                {current.description}
-              </p>
-            </div>
-
-            <div className="flex items-center gap-6">
-              <button className="font-mono text-base tracking-[0.05em] text-[#ecece3] border border-[#ecece3] rounded-full px-6 py-3 hover:bg-[#ecece3] hover:text-atlas-charcoal transition-colors">
-                LEARN MORE
-              </button>
-              <a
-                href="#contact"
-                className="font-mono text-base tracking-[0.05em] text-[#ecece3] flex items-center gap-2 hover:opacity-70 transition-opacity"
-              >
-                GET A QUOTE
-                <ArrowRight size={20} className="text-[#ecece3]" />
-              </a>
-            </div>
+          {/* Image Counter */}
+          <div className="relative z-10 flex items-center gap-3">
+            <div className="w-10 h-0.5 bg-white" />
+            <span className="font-mono text-xs font-medium tracking-[0.08em] text-white/80">
+              {String(activeTab + 1).padStart(2, "0")} / 05
+            </span>
           </div>
         </div>
 
-        {/* Tabs Menu */}
+        {/* Info Panel */}
         <div
-          className="flex-1 flex flex-col border-l border-black"
-          style={{ minHeight: 448 }}
+          className="flex flex-col justify-center gap-8 bg-[#1a1a1a] p-10 md:p-12 shrink-0 w-full md:w-[440px]"
         >
-          {tabs.map((tab, i) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(i)}
-              className={`flex-1 flex items-center justify-between gap-4 px-8 py-6 text-left border-b border-black last:border-b-0 transition-colors ${
-                i === activeTab ? "bg-atlas-dark" : "bg-white hover:bg-gray-50"
-              }`}
-            >
-              <span
-                className={`font-mono text-2xl leading-[1.4] w-full ${
-                  i === activeTab ? "text-[#ecece3]" : "text-[#666666]"
-                }`}
-              >
-                {tab.label}
-              </span>
-              <ChevronRight
-                size={20}
-                className={i === activeTab ? "text-[#ecece3cc]" : "text-[#cccccc]"}
-              />
+          <span className="font-mono text-[13px] font-medium tracking-[0.1em] text-[#666666]">
+            {current.num}
+          </span>
+          <h3 className="font-nineties text-[36px] leading-[1.2] text-[#ecece3] whitespace-pre-line">
+            {current.heading}
+          </h3>
+          <p className="font-mono text-sm leading-[1.6] text-[#999999]">
+            {current.description}
+          </p>
+          <div className="flex items-center gap-6">
+            <button className="font-mono text-[13px] font-medium tracking-[0.06em] text-[#1a1a1a] bg-[#ecece3] rounded-full px-7 py-3.5 hover:opacity-90 transition-opacity">
+              LEARN MORE
             </button>
-          ))}
+            <a
+              href="#contact"
+              className="font-mono text-[13px] tracking-[0.06em] text-[#ecece3] flex items-center gap-2 hover:opacity-70 transition-opacity"
+            >
+              GET A QUOTE
+              <ArrowRight size={18} className="text-[#ecece3]" />
+            </a>
+          </div>
         </div>
       </div>
     </section>
