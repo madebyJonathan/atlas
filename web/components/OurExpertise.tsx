@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 
@@ -19,47 +19,69 @@ const tabs = [
     id: "whole-home",
     label: "Whole Home",
     num: "02",
-    heading: "Whole Home\nRenovation",
+    heading: "Whole Home Renovations",
     description:
-      "Complete end-to-end home transformations that reimagine every room. From structural changes to interior finishes, we manage your entire project.",
+      "From foundation to finish, we manage complete home renovations that transform your entire living space while maintaining structural integrity and design cohesion.",
     image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080",
+      "https://images.unsplash.com/photo-1768321904126-e5e5872e0c20?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080",
   },
   {
     id: "outdoor",
     label: "Outdoor Living",
     num: "03",
-    heading: "Outdoor Living\nSpaces",
+    heading: "Outdoor Living Spaces",
     description:
-      "Extend your living space outdoors with custom decks, patios, pergolas, and landscaping. We design and build beautiful outdoor environments.",
+      "Extend your living area outdoors with custom patios, pergolas, outdoor kitchens, and landscaping that blend seamlessly with your home.",
     image:
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080",
+      "https://images.unsplash.com/photo-1762811054950-b74e0a055c80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080",
   },
   {
     id: "custom-builds",
     label: "Custom Builds",
     num: "04",
-    heading: "Custom\nBuilds",
+    heading: "Custom Home Builds",
     description:
-      "From ADUs to full custom home construction, we bring your architectural vision to life with precision craftsmanship and quality materials.",
+      "From the ground up, we bring your vision to life with precision-crafted custom homes designed around your lifestyle, preferences, and long-term needs.",
     image:
-      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080",
+      "https://images.unsplash.com/photo-1673190889624-c1d5959289fe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080",
   },
   {
     id: "interior",
     label: "Interior Design",
     num: "05",
-    heading: "Interior\nDesign",
+    heading: "Interior Design",
     description:
-      "Our in-house design team works with you to create spaces that are both beautiful and functional, with custom selections tailored to your lifestyle.",
+      "Curate every detail of your space with our interior design services — from material selection and color palettes to furniture layout and finishing touches.",
     image:
-      "https://images.unsplash.com/photo-1722888799634-c5093906feae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080",
+      "https://images.unsplash.com/photo-1603072845032-7b5bd641a82a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080",
   },
 ];
 
 export default function OurExpertise() {
   const [activeTab, setActiveTab] = useState(0);
-  const current = tabs[activeTab];
+  const [displayTab, setDisplayTab] = useState(0);
+  const [contentVisible, setContentVisible] = useState(true);
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const [indicator, setIndicator] = useState({ left: 0, width: 0 });
+
+  useEffect(() => {
+    const tab = tabRefs.current[activeTab];
+    if (tab) {
+      setIndicator({ left: tab.offsetLeft, width: tab.offsetWidth });
+    }
+  }, [activeTab]);
+
+  const handleTabChange = (i: number) => {
+    if (i === activeTab) return;
+    setContentVisible(false);
+    setActiveTab(i);
+    setTimeout(() => {
+      setDisplayTab(i);
+      setContentVisible(true);
+    }, 200);
+  };
+
+  const current = tabs[displayTab];
 
   return (
     <section
@@ -85,34 +107,52 @@ export default function OurExpertise() {
       </div>
 
       {/* Tabs Bar */}
-      <div className="flex flex-row border-b border-[#e0e0e0]">
+      <div className="relative flex flex-row border-b border-[#e0e0e0]">
         {tabs.map((tab, i) => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(i)}
+            ref={(el) => { tabRefs.current[i] = el; }}
+            onClick={() => handleTabChange(i)}
             className={`flex items-center px-6 py-4 pb-5 font-mono text-[15px] tracking-[0.03em] whitespace-nowrap transition-colors ${
               i === activeTab
-                ? "text-[#1a1a1a] font-medium border-b-2 border-[#1a1a1a] -mb-px"
+                ? "text-[#1a1a1a] font-medium"
                 : "text-[#999999] font-normal"
             }`}
           >
             {tab.label}
           </button>
         ))}
+        {/* Sliding underline */}
+        <span
+          className="absolute bottom-0 h-0.5 bg-[#1a1a1a]"
+          style={{
+            left: indicator.left,
+            width: indicator.width,
+            transition: "left 250ms ease, width 250ms ease",
+          }}
+        />
       </div>
 
       {/* Showcase */}
-      <div className="w-full flex flex-col md:flex-row rounded-[4px] overflow-hidden" style={{ height: 520 }}>
-        {/* Image Area */}
+      <div
+        className="w-full flex flex-col md:flex-row rounded-[4px] overflow-hidden"
+        style={{ height: 520 }}
+      >
+        {/* Image Area — all images stacked for crossfade */}
         <div className="relative flex-1 flex flex-col justify-end p-12 min-h-[300px] md:min-h-0">
-          <Image
-            key={current.id}
-            src={current.image}
-            alt={current.label}
-            fill
-            className="object-cover"
-          />
-          {/* Image Counter */}
+          {tabs.map((tab, i) => (
+            <Image
+              key={tab.id}
+              src={tab.image}
+              alt={tab.label}
+              fill
+              className="object-cover"
+              style={{
+                opacity: i === activeTab ? 1 : 0,
+                transition: "opacity 300ms ease",
+              }}
+            />
+          ))}
           <div className="relative z-10 flex items-center gap-3">
             <div className="w-10 h-0.5 bg-white" />
             <span className="font-mono text-xs font-medium tracking-[0.08em] text-white/80">
@@ -124,6 +164,11 @@ export default function OurExpertise() {
         {/* Info Panel */}
         <div
           className="flex flex-col justify-center gap-8 bg-[#1a1a1a] p-10 md:p-12 shrink-0 w-full md:w-[440px]"
+          style={{
+            opacity: contentVisible ? 1 : 0,
+            transform: contentVisible ? "translateY(0)" : "translateY(8px)",
+            transition: "opacity 200ms ease, transform 200ms ease",
+          }}
         >
           <span className="font-mono text-[13px] font-medium tracking-[0.1em] text-[#666666]">
             {current.num}
